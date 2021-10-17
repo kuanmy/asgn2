@@ -1,0 +1,376 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://kuanmy.github.io/asgn2/data/continent_country_internet.csv",
+    "format": {
+        "type": "csv",
+        "parse": {"internetuserate": "number", "incomeperperson": "number", "urbanrate": "number"}
+    }
+  },
+  "padding": {"left": -40},
+  "params": [
+    {
+      "name": "Urban_Rate_Above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 100,
+        "step": 10,
+        "name": "Min Urban Rate: "
+      }
+    },
+    {
+      "name": "Urban_Rate_Below",
+      "value": 100,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 100,
+        "step": 10,
+        "name": "Max Urban Rate: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": {
+        "and": [
+          "datum.incomeperperson > 0",
+          "datum.urbanrate > Urban_Rate_Above",
+          "datum.urbanrate < Urban_Rate_Below",
+          "datum.internetuserate >= 1"
+        ]  
+      }
+    }
+  ],
+  "hconcat": [
+    {
+      "width": 450,
+      "height": 500,    
+      "encoding": {
+        "x": {
+          "field": "internetuserate",
+          "type": "quantitative",
+          "title": "Internet Use Rate",
+          "axis": {"tickCount": 2},
+          "scale": {"type": "log", "domain": [1, 100]}
+        },
+        "y": {
+          "field": "incomeperperson",
+          "type": "quantitative",
+          "title": "Income Per Person",
+          "axis": {
+            "tickCount": 3,
+            "titlePadding": -20
+          },
+          "scale": {"type": "log", "domain": [100, 100000]}
+        }
+      },
+      "layer": [
+        {
+          "selection": {
+            "continent_highlight": {
+              "type": "multi",
+              "fields": ["continent"],
+              "bind": "legend"
+            }
+          },
+          "mark": "circle",
+          "encoding": {
+            "color": {
+              "title": "Continent",
+              "field": "continent", 
+              "type": "nominal", 
+              "scale": { 
+                "domain": [
+                    "Europe",
+                    "North America", 
+                    "South America", 
+                    "Asia", 
+                    "Oceania",
+                    "Africa" 
+                ], 
+                "range": [ 
+                    "#4477AA", 
+                    "#66CCEE", 
+                    "#228833",  
+                    "#EE6677",
+                    "#CCBB44", 
+                    "#AA3377" 
+                ] 
+              },
+              "legend": {
+                "orient": "none",
+                "legendX": 10,
+                "legendY": 10
+              }
+            },
+            "opacity": {
+              "condition": {
+                "selection": "continent_highlight",
+                "value": 0.6
+              },
+              "value": 0.1
+            },
+            "size": {
+              "title": "Urban Rate",
+              "field": "urbanrate",
+              "type": "quantitative",
+              "scale": {
+                "type": "threshold",
+                "domain": [30, 50, 70],
+                "range": [10, 50, 150, 300]
+              },
+              "legend": {
+                "orient": "none",
+                "legendX": 125,
+                "legendY": 10
+              }
+            },
+            "tooltip": [
+              {"type": "nominal", "field": "continent", "title": "Continent"},
+              {"type": "nominal", "field": "country", "title": "Country"},
+              {"type": "quantitative", "field": "incomeperperson", "title": "Income Per Person", "format": ",d"}, 
+              {"type": "quantitative", "field": "urbanrate", "title": "Urban Rate", "format": "d"},
+              {"type": "quantitative", "field": "internetuserate", "title": "Internet Use Rate", "format": "d"}
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "baseline": "middle",
+            "dx": -10,
+            "fontSize": 11.5,
+            "fontStyle": "italic"
+          },
+          "encoding": {
+            "text": {"field": "country", "type": "nominal"},
+            "color": {"value": "black"},
+            "opacity": {
+              "condition": {
+                "test": {
+                  "or": [
+                    "datum.country == 'United States of America'",
+                    "datum.country == 'Thailand'",
+                    "datum.country == 'Iraq'"
+                  ]
+                },
+                "value": 1
+              },
+              "value": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "spacing": 35,
+      "vconcat": [
+        {
+          "width": 200,
+          "height": 230,
+          "transform": [
+            {
+              "window": [{
+                "op": "rank", 
+                "as": "rank"
+              }],
+              "sort": [{"field": "internetuserate", "order": "descending"}]
+            },
+            {"filter": "datum.rank <= 5"}
+          ],
+          "encoding": {
+            "x": {
+              "field": "internetuserate",
+              "title": null,
+              "type": "quantitative",
+              "stack": false,
+              "axis": {
+                "grid": false,
+                "domain": false,
+                "ticks": false,
+                "labels": false
+              }
+            },
+            "y": {
+              "field": "country",
+              "title": "Countries with highest Internet Use Rate",
+              "type": "nominal",
+              "sort": "-x",
+              "scale": {
+                "padding": 0
+              },
+              "axis": {
+                "bandPosition": 0,
+                "grid": false,
+                "domain": false,
+                "ticks": false,
+                "labelAlign": "left",
+                "labelBaseline": "middle",
+                "labelPadding": -5,
+                "labelOffset": -10,
+                "titleX": 5,
+                "titleY": -5,
+                "titleAngle": 0,
+                "titleAlign": "left"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "country",
+                "type": "nominal",
+                "title": "Country"
+              },
+              {
+                "field": "internetuserate",
+                "type": "quantitative",
+                "title": "Internet Use Rate",
+                "format": "d"
+              }
+            ], 
+            "color": {
+              "condition": {
+                "test": "datum.rank == 1",
+                "value": "#18B7BE"
+              },
+              "value": "gray"
+            }
+          },
+          "layer": [
+            {
+              "mark": {
+                "type": "bar",
+                "yOffset": 5,
+                "height": {"band": 0.2}
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "yOffset": 5,
+                "align": "left",
+                "baseline": "middle",
+                "dx": 3
+              },
+              "encoding": {
+                "text": { 
+                  "field": "internetuserate",
+                  "type": "quantitative",
+                  "format": "d"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "width": 200,
+          "height": 230,
+          "transform": [
+            {
+              "window": [{
+                "op": "rank", 
+                "as": "rank"
+              }],
+              "sort": [{"field": "incomeperperson", "order": "descending"}]
+            },
+            {"filter": "datum.rank <= 5"}
+          ],
+          "encoding": {
+            "x": {
+              "field": "incomeperperson",
+              "title": null,
+              "type": "quantitative",
+              "stack": false,
+              "axis": {
+                "grid": false,
+                "labels": false,
+                "domain": false,
+                "ticks": false
+              }
+            },
+            "y": {
+              "field": "country",
+              "title": "Countries with highest Income Per Person",
+              "type": "nominal",
+              "sort": "-x",
+              "scale": {
+                "padding": 0
+              },
+              "axis": {
+                "bandPosition": 0,
+                "grid": false,
+                "domain": false,
+                "ticks": false,
+                "labelAlign": "left",
+                "labelBaseline": "middle",
+                "labelPadding": -5,
+                "labelOffset": -10,
+                "titleX": 5,
+                "titleY": -5,
+                "titleAngle": 0,
+                "titleAlign": "left"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "country",
+                "type": "nominal",
+                "title": "Country"
+              },
+              {
+                "field": "incomeperperson",
+                "type": "quantitative",
+                "title": "Income per person",
+                "format": ",d"
+              }
+            ],
+            "color": {
+              "condition": {
+                "test": "datum.rank == 1",
+                "value": "#18B7BE"
+              },
+              "value": "gray"
+            }
+          },
+          "layer": [
+            {
+              "mark": {
+                "type": "bar",
+                "yOffset": 5,
+                "height": {"band": 0.2}
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "yOffset": 5,
+                "align": "left",
+                "baseline": "middle",
+                "dx": 3
+              },
+              "encoding": {
+                "text": { 
+                  "field": "incomeperperson",
+                  "type": "quantitative",
+                  "format": ",d"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "resolve": {"legend": {"color": "independent", "size": "independent"}},
+  "config": {
+    "background": null,
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    }
+  }
+}

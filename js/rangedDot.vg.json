@@ -1,0 +1,134 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://kuanmy.github.io/asgn2/data/continent_country_internet.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"internetuserate": "number"}
+    }
+  },
+  "width": "container",
+  "height": 480,
+  "title": "Range of Internet Use Rate",
+  "transform": [
+    {
+      "joinaggregate": [
+        {"op": "min", "field": "internetuserate", "as": "minRate"},
+        {"op": "max", "field": "internetuserate", "as": "maxRate"},
+        {"op": "median", "field": "internetuserate", "as": "medRate"}
+      ],
+      "groupby": ["continent"]
+    }
+  ],
+  "encoding": {
+    "x": {
+      "axis": {
+        "grid": false
+      },
+      "title": null
+    },
+    "y": {
+      "field": "continent",
+      "title": null,
+      "type": "nominal",
+      "sort": {
+        "field": "medRate",
+        "order": "descending"
+      },
+      "scale": {"padding": 0},
+      "axis": {
+        "bandPosition": 0,
+        "grid": true,
+        "domain": false,
+        "ticks": false,
+        "labelAlign": "left",
+        "labelBaseline": "middle",
+        "labelPadding": -5,
+        "labelOffset": -15,
+        "labelFontSize": 12
+      }
+    },
+    "color": {
+      "field": "continent",
+      "scale": { 
+        "domain": [
+          "Europe",
+          "North America", 
+          "South America", 
+          "Oceania",
+          "Asia", 
+          "Africa" 
+        ], 
+        "range": [ 
+          "#4477AA", 
+          "#66CCEE", 
+          "#228833", 
+          "#CCBB44", 
+          "#EE6677", 
+          "#AA3377" 
+        ] 
+      },
+      "legend": null
+    },
+    "tooltip": [
+      {"field": "continent", "title": "Continent", "type": "nominal"},
+      {"field": "minRate", "title": "Min", "type": "quantitative", "format": "d"},
+      {"field": "maxRate", "title": "Max",  "type": "quantitative", "format": "d"}
+    ]
+  },
+  "layer": [
+    {
+      "mark":{
+        "type": "rule",
+        "yOffset": 5
+      },
+      "encoding": {
+        "x": {
+          "field": "minRate",
+          "type": "quantitative"
+        },
+        "x2": {
+          "field": "maxRate",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 100,
+        "yOffset": 5
+      },
+      "encoding": {
+        "x": {
+          "field": "minRate",
+          "title": "Internet Use Rate",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 100,
+        "yOffset": 5
+      },
+      "encoding": {
+        "x": {
+          "field": "maxRate",
+          "type": "quantitative"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    }
+  }
+}

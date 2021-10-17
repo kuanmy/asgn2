@@ -1,0 +1,446 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://kuanmy.github.io/asgn2/data/continent_country_internet.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"internetuserate": "number"}
+    }
+  },
+  "title": "Median Internet Use Rate",
+  "padding": {"left": 25, "right": 25},
+  "transform": [
+    {
+      "calculate": "100",
+      "as": "total"
+    }
+  ],
+  "columns": 2,
+  "concat": [
+    {
+      "width": 150,
+      "height": 150,
+      "transform": [
+        {
+          "filter": "datum.continent == 'Europe'"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "arc",
+            "innerRadius": 50,
+            "color": "#4477AA"
+          },
+          "encoding": {
+            "theta": {
+              "aggregate": "median",
+              "field": "total",
+              "scale": {"domain": [0, 100]}
+            },
+            "opacity": {
+              "value": 0.3
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "arc",
+            "innerRadius": 50,
+            "color": "#4477AA"
+          },
+          "encoding": {
+            "theta": {
+              "aggregate": "median", 
+              "field": "internetuserate",
+              "scale": {"domain": [0, 100]}
+            },
+            "tooltip": [
+              {
+                "field": "continent",
+                "type": "nominal",
+                "title": "Continent"
+              },
+              {
+                "aggregate": "median", 
+                "field": "internetuserate",
+                "title": "Median",
+                "format": "d"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "radius": 0,
+            "color": "#4477AA"
+          },
+          "encoding": {
+            "text": {
+              "aggregate": "median", 
+              "field": "internetuserate",
+              "format": "d"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 150,
+      "height": 150,
+      "transform": [
+        {
+          "filter": "datum.continent == 'North America'"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "arc",
+            "innerRadius": 50,
+            "color": "#66CCEE"
+          },
+          "encoding": {
+            "theta": {
+              "aggregate": "median",
+              "field": "total",
+              "scale": {"domain": [0, 100]}
+            },
+            "opacity": {
+              "value": 0.3
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "arc",
+            "innerRadius": 50,
+            "color": "#66CCEE"
+          },
+          "encoding": {
+            "theta": {
+              "aggregate": "median", 
+              "field": "internetuserate",
+              "scale": {"domain": [0, 100]}
+            },
+            "tooltip": [
+              {
+                "field": "continent",
+                "type": "nominal",
+                "title": "Continent"
+              },
+              {
+                "aggregate": "median", 
+                "field": "internetuserate",
+                "title": "Median",
+                "format": "d"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "radius": 0,
+            "color": "#66CCEE"
+          },
+          "encoding": {
+            "text": {
+              "aggregate": "median", 
+              "field": "internetuserate",
+              "format": "d"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 150,
+      "height": 150,
+      "transform": [
+        {
+          "filter": "datum.continent == 'South America'"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "arc",
+            "innerRadius": 50,
+            "color": "#228833"
+          },
+          "encoding": {
+            "theta": {
+              "aggregate": "median",
+              "field": "total",
+              "scale": {"domain": [0, 100]}
+            },
+            "opacity": {
+              "value": 0.3
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "arc",
+            "innerRadius": 50,
+            "color": "#228833"
+          },
+          "encoding": {
+            "theta": {
+              "aggregate": "median", 
+              "field": "internetuserate",
+              "scale": {"domain": [0, 100]}
+            },
+            "tooltip": [
+              {
+                "field": "continent",
+                "type": "nominal",
+                "title": "Continent"
+              },
+              {
+                "aggregate": "median", 
+                "field": "internetuserate",
+                "title": "Median",
+                "format": "d"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "radius": 0,
+            "color": "#228833"
+          },
+          "encoding": {
+            "text": {
+              "aggregate": "median", 
+              "field": "internetuserate",
+              "format": "d"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 150,
+      "height": 150,
+      "transform": [
+        {
+          "filter": "datum.continent == 'Asia'"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "arc",
+            "innerRadius": 50,
+            "color": "#EE6677"
+          },
+          "encoding": {
+            "theta": {
+              "aggregate": "median",
+              "field": "total",
+              "scale": {"domain": [0, 100]}
+            },
+            "opacity": {
+              "value": 0.3
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "arc",
+            "innerRadius": 50,
+            "color": "#EE6677"
+          },
+          "encoding": {
+            "theta": {
+              "aggregate": "median", 
+              "field": "internetuserate",
+              "scale": {"domain": [0, 100]}
+            },
+            "tooltip": [
+              {
+                "field": "continent",
+                "type": "nominal",
+                "title": "Continent"
+              },
+              {
+                "aggregate": "median", 
+                "field": "internetuserate",
+                "title": "Median",
+                "format": "d"
+              }
+            ]            
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "radius": 0,
+            "color": "#EE6677"
+          },
+          "encoding": {
+            "text": {
+              "aggregate": "median", 
+              "field": "internetuserate",
+              "format": "d"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 150,
+      "height": 150,
+      "transform": [
+        {
+          "filter": "datum.continent == 'Oceania'"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "arc",
+            "innerRadius": 50,
+            "color": "#CCBB44"
+          },
+          "encoding": {
+            "theta": {
+              "aggregate": "median",
+              "field": "total",
+              "scale": {"domain": [0, 100]}
+            },
+            "opacity": {
+              "value": 0.3
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "arc",
+            "innerRadius": 50,
+            "color": "#CCBB44"
+          },
+          "encoding": {
+            "theta": {
+              "aggregate": "median", 
+              "field": "internetuserate",
+              "scale": {"domain": [0, 100]}
+            },
+            "tooltip": [
+              {
+                "field": "continent",
+                "type": "nominal",
+                "title": "Continent"
+              },
+              {
+                "aggregate": "median", 
+                "field": "internetuserate",
+                "title": "Median",
+                "format": "d"
+              }
+            ]             
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "radius": 0,
+            "color": "#CCBB44"
+          },
+          "encoding": {
+            "text": {
+              "aggregate": "median", 
+              "field": "internetuserate",
+              "format": "d"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 150,
+      "height": 150,
+      "transform": [
+        {
+          "filter": "datum.continent == 'Africa'"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "arc",
+            "innerRadius": 50,
+            "color": "#AA3377"
+          },
+          "encoding": {
+            "theta": {
+              "aggregate": "median",
+              "field": "total",
+              "scale": {"domain": [0, 100]}
+            },
+            "opacity": {
+              "value": 0.3
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "arc",
+            "innerRadius": 50,
+            "color": "#AA3377"
+          },
+          "encoding": {
+            "theta": {
+              "aggregate": "median", 
+              "field": "internetuserate",
+              "scale": {"domain": [0, 100]}
+            },
+            "tooltip": [
+              {
+                "field": "continent",
+                "type": "nominal",
+                "title": "Continent"
+              },
+              {
+                "aggregate": "median", 
+                "field": "internetuserate",
+                "title": "Median",
+                "format": "d"
+              }
+            ]             
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "radius": 0,
+            "color": "#AA3377"
+          },
+          "encoding": {
+            "text": {
+              "aggregate": "median", 
+              "field": "internetuserate",
+              "format": "d"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "background": null,
+    "text": {
+      "fontSize": 30
+    },
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    }
+  }
+}

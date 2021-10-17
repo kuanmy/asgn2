@@ -1,0 +1,153 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 380,
+  "projection": {
+    "type": "equalEarth"
+  },
+  "data": {
+    "url": "https://kuanmy.github.io/asgn2/js/ne_110m_admin_0_countries.topojson",
+    "format": {
+        "type": "topojson",
+        "feature": "ne_110m_admin_0_countries"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "color": "gray",
+        "stroke": "black"
+      },
+      "encoding": {
+        "fillOpacity": {
+          "condition": {"param": "select", "value": 1},
+          "value": 0.4
+        },
+        "strokeWidth": {
+          "condition": [
+            {
+              "param": "select",
+              "empty": false,
+              "value": 2
+            },
+            {
+              "param": "highlight",
+              "empty": false,
+              "value": 1
+            }
+          ],
+          "value": 0.1
+        },
+        "tooltip": [
+          {"field": "properties.ADMIN", "type": "nominal", "title": "Country"}
+        ]
+      }
+    },
+    {
+      "params": [
+        {
+          "name": "highlight",
+          "select": {"type": "point", "on": "mouseover"}
+        },
+        {"name": "select", "select": "point"}
+      ],
+      "transform": [
+        {
+          "lookup": "properties.ADMIN",
+          "from": {
+            "data": {
+              "url": "https://kuanmy.github.io/asgn2/data/continent_country_internet.csv"
+            },
+            "key": "country",
+            "fields": ["internetuserate"]
+          }
+        },
+        {
+          "filter": "datum.internetuserate > 0"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "black"
+      },
+      "encoding": {
+        "color": {
+          "title": "Internet Use Rate",
+          "field": "internetuserate",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "lighttealblue"
+          },
+          "legend": {
+            "orient": "none",
+            "legendX": 20,
+            "legendY": 80
+          }
+        },
+        "fillOpacity": {
+          "condition": {"param": "select", "value": 1},
+          "value": 0.4
+        },
+        "strokeWidth": {
+          "condition": [
+            {
+              "param": "select",
+              "empty": false,
+              "value": 2
+            },
+            {
+              "param": "highlight",
+              "empty": false,
+              "value": 1
+            }
+          ],
+          "value": 0.1
+        },
+        "tooltip": [
+          {"field": "properties.ADMIN", "type": "nominal", "title": "Country"},
+          {"field": "internetuserate", "type": "quantitative", "title": "Internet User Rate", "format": "d"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"country": "Iceland"}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "dx": -35,
+        "dy": -152
+      },
+      "encoding": {
+        "text": {"field": "country"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"country": "East Timor"}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "dx": 240,
+        "dy": 35
+      },
+      "encoding": {
+        "text": {"field": "country"}
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    }
+  } 
+}
+  

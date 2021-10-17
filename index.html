@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <!-- Import Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+<head>
+  <title>Global Internet Usage</title>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+  <!-- Import Pure CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Import self-defined CSS styles -->
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+  <link rel="stylesheet" type="text/css" href="css/fonts.css" media="all">
+</head>
+<body>
+
+ <div class="page">
+    <!-- Title -->
+    <div class="title">
+      <h1>GLOBAL INTERNET USAGE &nbsp;<span class="date">as of March, 2021</span></h1>
+    </div>  
+
+    <hr class="section-line">
+
+    <!-- World Map -->
+    <div class="pure-g">
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <h2>INTERNET USE RATE by COUNTRY</h2>
+          <p>
+            <span class="highlight">Internet use rate</span> indicates the number of internet users per 100 people, 
+            where internet users are defined as people that has access to the worldwide network 
+            <span class="cite">(Sandhya, 2021)</span>. 
+          </p>
+          <p>
+            From the map on the right, it can be seen that <span class="highlight dark-text">Iceland</span> has the 
+            <span class="highlight dark-text">highest</span> internet use rate among all countries, which is around 
+            <span class="highlight dark-text">96</span>. In contrast, <span class="highlight light-text">East Timor</span> 
+            has the <span class="highlight light-text">lowest</span> internet use rate of <span class="highlight light-text">0</span>, 
+            indicating that almost no one per 100 people has access to the Internet.
+          </p>
+        </div>
+      </div>
+      <div class="pure-u-2-3">
+        <div id="vis1" class="vis-container"></div>
+      </div>
+    </div>
+
+    <!-- Donut + Min-max range -->
+    <div class="pure-g">
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <h2>INTERNET USE RATE by CONTINENT</h2>
+          <p>Next, we look into the distribution of the internet use rate for each continent. First, 
+            <span class="highlight europe-text">Europe</span> has the <span class="highlight europe-text">highest</span> 
+            median internet use rate of <span class="highlight europe-text">69</span>. This is followed by 
+            <span class="highlight north-america-text">North America</span>, <span class="highlight south-america-text">South America</span>, 
+            <span class="highlight asia-text">Asia</span> and <span class="highlight oceania-text">Oceania</span>. 
+            On the contrary, <span class="highlight africa-text">Africa</span> has the <span class="highlight africa-text">lowest</span> 
+            median internet use rate of all, which is around <span class="highlight africa-text">6</span>.
+          </p>
+          <p>
+            On the other hand, looking at the min-max range of the internet use rate in each continent, it can 
+            be seen that <span class="highlight europe-text">European</span> countries typically have an internet 
+            use rate <span class="highlight europe-text">larger than 30. </span> In comparison, 
+            <span class="highlight africa-text">Africa</span> countries all have an internet use rate 
+            <span class="highlight africa-text">lower than 50</span>. Additionally, among all continents,  
+            <span class="highlight asia-text">Asia</span> and <span class="highlight oceania-text">Oceania</span> 
+            have the <span class="highlight light-text">largest range</span> of internet use rates, spanning from 0 to 83. </p>
+        </div>
+      </div>
+      <div class="pure-u-1-3">
+        <div id="vis2"  class="vis-container"></div>
+      </div> 
+      <div class="pure-u-1-3">
+        <div id="vis3"  class="vis-container"></div>
+      </div>   
+    </div>
+    
+    <!-- Bubble + Bar -->
+    <div class="pure-g">
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <h2>INCOME PER PERSON & URBAN RATE vs INTERNET USE RATE</h2>
+          <p>Lastly, the relationship between income per person and urban rate with internet use rate is explored. 
+            Here, <span class="highlight">income per person</span> indicates the Gross Domestic Product per capita 
+            in 2000 US dollars whereas <span class="highlight">urban rate</span> indicates the percentage of people 
+            living in the urban areas <span class="cite">(Sandhya, 2021)</span> . 
+          </p>
+          <p>
+            Overall, the larger the income per person of a country, the internet use rate of the country tend to be 
+            larger too. For instance, the United States of America has high income per person and internet use rate, 
+            Thailand has medium income per person and internet use rate, whereas Iraq has low income per person and 
+            internet use rate. This indicates a <span class="highlight light-text">positive relationship</span>  between 
+            <span class="highlight dark-text">income per person</span> and <span class="highlight dark-text">internet use rate</span>.
+            However, there isn’t a clear correlation between urban rate and internet use rate.
+          </p>
+          <p>
+            The slider below can be adjusted to filter out the countries that are not within the specified range of 
+            urban rates. Without any restrictions, the country with the <span class="highlight dark-text">highest internet use rate</span> 
+            is <span class="highlight dark-text">Iceland</span> while <span class="highlight light-text">Liechtenstein</span> 
+            has the  <span class="highlight light-text">highest income per person</span> among all countries.
+          </p>
+        </div>
+      </div>
+      <div class="pure-u-2-3">
+        <div id="vis4"  class="vis-container"></div>
+      </div>    
+    </div>
+
+    <hr class="section-line">
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>FIT3179 &nbsp;&nbsp;|&nbsp;&nbsp; Designer: Meng Yi Kuan &nbsp;&nbsp;|&nbsp;&nbsp; Data Source:&nbsp; <a href="https://www.kaggle.com/sansuthi/gapminder-internet" target="_blank">Global Internet Usage</a> by Sandhya, S. (2021)</p>
+    </div>
+  </div>
+   
+<script type="text/javascript">
+  var specVis1 = "js/choropleth_map.vg.json";
+  var specVis2= "js/donut.vg.json";
+  var specVis3= "js/rangedDot.vg.json";
+  var specVis4= "js/bubble3.vg.json";
+
+  vegaEmbed('#vis1', specVis1, {"actions": false}).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+  
+  vegaEmbed('#vis2', specVis2, {"actions": false}).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  vegaEmbed('#vis3', specVis3, {"actions": false}).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+  vegaEmbed('#vis4', specVis4, {"actions": false}).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+
+</script>
+</body>
+</html>

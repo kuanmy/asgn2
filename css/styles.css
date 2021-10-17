@@ -1,0 +1,41 @@
+h1{
+  margin-top: 0px;
+}
+.title{
+  background-color: #F9F7F0;
+}
+body{
+  background-color: #072A40;
+}
+.page{
+  width: 1150px;    
+  background-color: #F9F7F0;   
+  margin: auto;
+  padding: 50px;
+}
+.section-line{
+  border-width: 10px;
+}
+.vis-container{
+  width: 100%;
+}
+.description p{
+  color: #072A40;
+}
+.description h2{
+  margin-top:0px;
+  text-align: left;
+}
+.description-left{
+  padding-right: 20px;
+  text-align: justify;
+  /* margin: 0;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); */
+}
+.pure-g{
+  margin-top: 50px;
+  margin-bottom: 80px;
+}
