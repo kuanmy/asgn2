@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
-    "url": "https://kuanmy.github.io/asgn2/data/continent_country_internet.csv",
+    "url": "https://kuanmy.github.io/global-internet-usage-visualisation.git/data/continent_country_internet.csv",
     "format": {
       "type": "csv",
       "parse": {"internetuserate": "number"}
